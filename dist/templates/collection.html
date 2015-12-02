@@ -1,0 +1,14 @@
+<body class="collection">
+
+   <section class="album-covers container clearfix" ng-controller="CollectionController">
+	   <div ng-repeat="info in albumPicasso.albuminfo">
+	   <img src="{{info.albumArtUrl}}">
+	   <p>{{info.name}}</p>
+	   <p>{{info.artist}}</p>
+	   </div>
+
+   </section>
+   <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+   <script src="scripts/collection.js"></script>
+
+</body>
