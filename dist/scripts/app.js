@@ -1,6 +1,4 @@
 (function () {
-	var app = angular.module('blocjams', ['ui.router']);
-	var musicApp = angular.module('musicApp', []);
 
 	// --- Albums ---//
 	var albumPicasso = {
@@ -31,6 +29,9 @@
 	};
 
 	// --- End Album -- //
+
+	var app = angular.module('blocjams', ['ui.router']);
+
 
 	app.config(function($stateProvider, $locationProvider) {
 		$locationProvider.html5Mode({
@@ -71,17 +72,73 @@
 
 	}]);
 
-	app.controller('AlbumController', ['$scope', function($scope) {
+	app.controller('AlbumController', ['$scope', 'SongPlayer', function($scope, SongPlayer) {
+		$scope.songPlayer = SongPlayer;
 		$scope.album = angular.copy(albumPicasso);
+
 	}]);
 
 	// ---Services--- //
-	musicApp.service('SongPlayer', function() {
-	    return {
-	        pause: function() {	
-	            this.playing = false;
-	            currentSoundFile.pause();
-	        }
+	app.service('SongPlayer', function() {
+		var currentSoundFile = null;
+
+		var trackIndex = function (album,song) {
+			return album.songs.indexOf(song)
+		};
+
+
+		return {
+				currentSong: null,
+				currentAlbum: null,
+				playing: false,
+				volume: 90,
+
+		        pause: function() {
+		            this.playing = false;
+		            currentSoundFile.pause();
+		        },
+		        play: function() {
+		        	this.playing = true;
+		        	currentSoundFile.play();
+		        },
+		        next: function () {
+		        	var currentTrackIndex = trackIndex(this.currentAlbum,this.currentSong); //trackIndex finds the index of currentSong(song) in CurrentAlbum (album)
+		        	currentTrackIndex++;
+		        	if (currentTrackIndex > album.songs.length) {
+		        		this.playing = false;
+		        		this.setSong = null;
+		        	}
+		        	setSong(currentAlbum,currentAlbum.songs[currentTrackIndex]);
+		        },
+		        previous: function () {
+		        	var currentTrackIndex = trackIndex(currentAlbum,currentSong);
+		        	currentTrackIndex--;
+		        	if (currentTrackIndex < 0) {
+		        		this.playing = false;
+		        		this.setSong = null;
+		        	}
+		        },
+		        setSong: function (album, song) {
+		        	if (currentSoundFile) {
+		        		currentSoundFile.stop()
+		        	}
+		        	currentAlbum = album;
+		        	currentSong = song;
+
+		        	currentSoundFile = new buzz.sound(song.audioUrl, {
+		        	  formats: [ "mp3" ],
+		        	  preload: true
+		        	});
+
+		        	currentSoundFile.setVolume(this.volume);
+		        },
+		        setVolume: function () {
+		        	if (currentSoundFile) {
+		        		currentSoundFile.setVolume(volume);
+		        	}
+		        	// this.volume = volume; (why?)
+		        }
+		    }
 	        //check if a song playing
 	        //identify currently playing song
 	        //identify current album
@@ -90,7 +147,6 @@
 			//Go to the previous track (What if the user is on the first track?)
 			//Go to the next track (What if the user is on the last track?)
 			//Adjust the volume
-	    }
 	});
 
 })();
