@@ -2,11 +2,7 @@
      function SongPlayer($rootScope, Fixtures) {
           
           var SongPlayer = {};
-
-
           var currentAlbum = Fixtures.getAlbum();
-
-
 
           /**
           * @desc Buzz object audio file
@@ -28,7 +24,8 @@
            
               currentBuzzObject = new buzz.sound(song.audioUrl, {
                   formats: ['mp3'],
-                  preload: true
+                  preload: true,
+                  volume: SongPlayer.volume
               });
 
               currentBuzzObject.bind('timeupdate', function() {
@@ -152,6 +149,14 @@
               if (currentBuzzObject) {
                   currentBuzzObject.setTime(time);
               }
+          };
+
+          SongPlayer.volume = 10;
+
+          SongPlayer.setVolume = function(volume) {
+            if (currentBuzzObject) {
+              currentBuzzObject.setVolume(volume);
+            }
           };
 
           return SongPlayer;

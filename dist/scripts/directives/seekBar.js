@@ -73,7 +73,7 @@
                     if (typeof scope.onChange === 'function') {
                         scope.onChange({value: newValue});
                     }
-                };   	    
+                };
     	    }
     	};
     }
