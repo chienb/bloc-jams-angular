@@ -1,5 +1,5 @@
  (function() {
-     function SongPlayer($rootScope, Fixtures) {
+     function SongPlayer($rootScope, Fixtures, Metric) {
           
           var SongPlayer = {};
           var currentAlbum = Fixtures.getAlbum();
@@ -61,7 +61,10 @@
           */
           var playSong = function (song) {
               currentBuzzObject.play();
-              song.playing = true; 
+              song.playing = true;
+              Metric.registerSongPlay(song);
+              //Metric.listSongsPlayed(song);
+
           };
 
           var stopSong = function (song) {
@@ -164,5 +167,5 @@
  
      angular
          .module('blocJams')
-         .factory('SongPlayer', ['$rootScope', 'Fixtures', SongPlayer]);
+         .factory('SongPlayer', ['$rootScope', 'Fixtures', 'Metric', SongPlayer]);
  })();
