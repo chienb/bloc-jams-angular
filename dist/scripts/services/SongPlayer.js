@@ -58,13 +58,12 @@
           * @function playSong
           * @desc Plays the currentBuzzObject audio file
           * @param {Object} song
-          */
+          */ 
           var playSong = function (song) {
               currentBuzzObject.play();
               song.playing = true;
               Metric.registerSongPlay(song);
-              //Metric.listSongsPlayed(song);
-
+              Metric.countSongPlays(song);
           };
 
           var stopSong = function (song) {

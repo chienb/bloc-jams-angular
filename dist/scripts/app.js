@@ -17,6 +17,11 @@
  		        controller: 'AlbumCtrl as album',
  		        templateUrl: '/templates/album.html'
  		    })
+            .state('metrics', {
+                url: '/metrics',
+                controller: 'MetricsCtrl as metrics',
+                templateUrl: '/templates/metrics.html'
+            })
  		    .state('collection', {
  		        url: '/collection',
  		        controller: 'CollectionCtrl as collection',
@@ -25,7 +30,7 @@
     }
 
     angular
-        .module('blocJams', ['firebase','ui.router'])
+        .module('blocJams', ['firebase','ui.router', 'nvd3'])
         .config(config);
 })();
 
