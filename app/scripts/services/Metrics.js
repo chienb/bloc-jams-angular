@@ -17,7 +17,6 @@
                 songs.$add({
                     name: songname,
                     sentAt: Firebase.ServerValue.TIMESTAMP
-
                 });
             },
             countSongPlays: function(songObj) {
