@@ -3,45 +3,29 @@
          var Fixtures = {};
 
          // Example Album
-         var albumPicasso = {
-             name: 'The Colors',
-             artist: 'Pablo Picasso',
-             label: 'Cubism',
-             year: '1881',
-             albumArtUrl: '/assets/images/album_covers/01.png',
+         var albumGemini = {
+             name: 'Gemini EP',
+             artist: 'What So Not',
+             label: 'Sweat It Out!/OWSLA',
+             year: '2015',
+             albumArtUrl: 'http://a1.mzstatic.com/us/r30/Music7/v4/31/ab/64/31ab6444-4b65-7417-509f-f41b8930031a/cover170x170.jpeg',
              songs: [
-                { name: 'Blue', length: 268, audioUrl: '/assets/music/1' },
-                { name: 'Green', length: 217.99, audioUrl: '/assets/music/2' },
-                { name: 'Red', length: 252, audioUrl: '/assets/music/3' },
-                { name: 'Pink', length: 240, audioUrl: '/assets/music/4' },
-                { name: 'Magenta', length: 270.99, audioUrl: '/assets/music/5' }
-             ]
-         };
-
-         // Another Example Album
-         var albumMarconi = {
-             name: 'The Telephone',
-             artist: 'Guglielmo Marconi',
-             label: 'EM',
-             year: '1909',
-             albumArtUrl: '/assets/images/album_covers/20.png',
-             songs: [
-                 { name: 'Hello, Operator?', length: '1:01' },
-                 { name: 'Ring, ring, ring', length: '5:01' },
-                 { name: 'Fits in your pocket', length: '3:21' },
-                 { name: 'Can you hear me now?', length: '3:14' },
-                 { name: 'Wrong phone number', length: '2:15' }
+                { name: 'Intro (feat. Tunji Ige)', length: 59, audioUrl: '/assets/music/01 Intro (feat. Tunji)' },
+                { name: 'Gemini (feat. George Maple)', length: 270, audioUrl: '/assets/music/02 Gemini (feat. George Maple)' },
+                { name: 'Arrows (feat. Dawn Golden)', length: 266, audioUrl: '/assets/music/03 Arrows (feat. Dawn Golden)' },
+                { name: 'Death Drive (feat. KLP)', length: 272, audioUrl: '/assets/music/04 Death Drive (feat. KLP)' },
+                { name: 'Oddity', length: 251, audioUrl: '/assets/music/05 Oddity' }
              ]
          };
 
          Fixtures.getAlbum = function() {
-             return albumPicasso;
+             return albumGemini;
          };
 
          Fixtures.getCollection = function (numberOfAlbums) {
          	var albums = [];
          	for (var i = 0; i < numberOfAlbums; i++) {
-         	    albums.push(angular.copy(albumPicasso));
+         	    albums.push(angular.copy(albumGemini));
          	}
          	return albums;
          };
