@@ -15,9 +15,9 @@
             },
             countSongPlays: function(songObj) {
                 var FilteredSong = $firebaseArray(firebaseRef.child('Songs').orderByChild('name').equalTo(songObj.name));
-                FilteredSong.$loaded().then(function(){
-            });
-        };
+                FilteredSong.$loaded();
+            }
+        }
     }
 
     angular
